@@ -27,7 +27,7 @@ Traditional Game Backend          Mini-DB Server
 └─────────────────────┘          └─────────────────────┘
 ```
 
-**Built for multiplayer games.** Used in production for TicTacToe, chat systems, and real-time strategy games with thousands of concurrent players.
+**Built for multiplayer games.**
 
 ## Key Features
 
@@ -198,5 +198,6 @@ cargo test
 ```
 
 ## License
+
 
 MIT License - see [LICENSE](LICENSE) file.
