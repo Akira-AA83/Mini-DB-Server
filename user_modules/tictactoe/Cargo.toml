@@ -1,0 +1,36 @@
+[package]
+name = "tictactoe-wasm"
+version = "1.0.0"
+edition = "2021"
+description = "TicTacToe game logic WASM module for Mini-DB"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# WASM-specific dependencies
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Console logging for debugging
+console_error_panic_hook = "0.1.7"
+wee_alloc = "0.4.5"
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+  "console",
+]
+
+# Optimize for size in release builds
+[profile.release]
+opt-level = "s"
+lto = true
+debug = false
+panic = "abort"
+
+# WASM-specific build settings
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = ["-Os", "--enable-mutable-globals"]

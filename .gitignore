@@ -1,0 +1,65 @@
+# Rust
+/target/
+Cargo.lock
+**/*.rs.bk
+
+# Database files (runtime generated)
+*.db/
+mini_db.db/
+gaming.db/
+chat_system.db/
+admin_panel.db/
+simple_test.db/
+tictactoe_game.db/
+mini_db_system.db/
+index_db_*/
+temp/
+database_registry.txt
+
+# Log files
+*.log
+server.log
+websocket-server.log
+server_output.log
+
+# WASM compiled modules (these should be built from source)
+modules/*.wasm
+
+# Test artifacts
+test.wasm
+*.sh
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Configuration examples (keep the examples but ignore actual config)
+!example_*.toml
+!*_example.*
+
+# Build artifacts
+/target/
+**/target/
+
+# User modules target directories
+user_modules/*/target/
+user_modules/*/Cargo.lock
+
+# Backup files
+*.bak
+*.backup
+
+# Runtime data directories
+data/
+db/

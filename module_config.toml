@@ -1,0 +1,78 @@
+# 🎮 Mini-DB Module Configuration
+# ===============================
+# Configurazione per collegare tabelle a moduli WASM esterni
+# Non modificare il codice del server - tutto viene configurato qui!
+
+[modules.tictactoe]
+# Modulo WASM per la logica di TicTacToe
+wasm_module = "tictactoe"
+enabled = true
+description = "TicTacToe game logic and validation"
+
+# Tabelle gestite da questo modulo
+[[modules.tictactoe.tables]]
+name = "ttt_sessions"
+events = ["insert", "update", "delete"]
+realtime_enabled = true
+wasm_validation = true
+channel_pattern = "gaming.ttt_sessions"
+fields = ["session_id", "player_x", "player_o", "game_status", "board_state", "current_turn", "winner"]
+
+[[modules.tictactoe.tables]]
+name = "ttt_moves"
+events = ["insert"]
+realtime_enabled = true
+wasm_validation = true
+channel_pattern = "game.tictactoe.moves.{session_id}"
+fields = ["move_id", "session_id", "player_id", "player_symbol", "cell_position"]
+
+# Funzioni WASM esposte
+[modules.tictactoe.functions]
+validate_move = "validate_move"
+make_move = "make_move"
+check_win_condition = "check_win_condition"
+get_game_state = "get_game_state"
+
+# ===============================
+# 🗨️ CHAT SYSTEM MODULE
+# ===============================
+
+[modules.chat]
+# Modulo WASM per il sistema di chat real-time
+wasm_module = "chat"
+enabled = true
+description = "Real-time chat system with message validation and room management"
+
+# Chat Rooms Table
+[[modules.chat.tables]]
+name = "chat_rooms"
+events = ["insert", "update", "delete"]
+realtime_enabled = true
+wasm_validation = true
+channel_pattern = "gaming.chat.rooms"
+fields = ["room_id", "room_name", "room_type", "created_by", "max_users", "created_at"]
+
+# Chat Messages Table  
+[[modules.chat.tables]]
+name = "chat_messages"
+events = ["insert", "delete"]
+realtime_enabled = true
+wasm_validation = true
+channel_pattern = "gaming.chat_messages.{room_id}"
+fields = ["message_id", "room_id", "user_id", "username", "message_content", "message_type", "timestamp"]
+
+# Chat Participants Table
+[[modules.chat.tables]]
+name = "chat_participants"
+events = ["insert", "delete"]
+realtime_enabled = true
+wasm_validation = true
+channel_pattern = "gaming.chat_participants.{room_id}"
+fields = ["room_id", "user_id", "username", "joined_at", "role"]
+
+# Chat WASM Functions
+[modules.chat.functions]
+validate_message = "validate_message"
+validate_room_creation = "validate_room_creation"
+process_chat_action = "process_chat_action"
+get_room_stats = "get_room_stats"
