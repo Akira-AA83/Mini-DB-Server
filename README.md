@@ -70,6 +70,10 @@ git clone https://github.com/Akira-AA83/Mini-DB-Server.git
 cd Mini-DB-Server
 cargo run
 # Server starts on ws://localhost:8080
+
+# Or specify custom database and configuration:
+cargo run -- --db gaming.db --config gaming_modules.toml --port 8080
+cargo run -- --db ecommerce.db --port 8081
 ```
 
 ### Connect and Query
@@ -115,6 +119,30 @@ public class GameManager : MonoBehaviour {
 ```
 
 **Includes**: Complete multiplayer examples (TicTacToe, Chat System, Pong), cross-platform support, and real-time WebSocket client.
+
+## Flexible Database Configuration
+
+Choose your database and configuration for any project:
+
+```bash
+# Gaming server
+cargo run -- --db gaming.db --config gaming_modules.toml --port 8080
+
+# E-commerce application  
+cargo run -- --db shop.db --config ecommerce_modules.toml --port 8081
+
+# IoT sensor monitoring
+cargo run -- --db sensors.db --config iot_modules.toml --port 8082
+
+# Default configuration
+cargo run
+```
+
+**Command Line Options:**
+- `--db <file>` - Specify database file (default: mini_db.db)
+- `--config <file>` - Custom module configuration (default: module_config.toml)  
+- `--port <number>` - WebSocket port (default: 8080)
+- `--demo` - Run with demo data
 
 ## Gaming Examples
 
