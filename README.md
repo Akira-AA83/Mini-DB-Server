@@ -1,7 +1,7 @@
 # 🚀 Mini-DB Server
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)](https://github.com/Akira-AA83/Mini-DB-Server)
-[![Version](https://img.shields.io/badge/version-0.3.0-blue?style=flat-square)](https://github.com/Akira-AA83/Mini-DB-Server/releases)
+[![Version](https://img.shields.io/badge/version-0.4.0-blue?style=flat-square)](https://github.com/Akira-AA83/Mini-DB-Server/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-1.70+-orange?style=flat-square)](https://www.rust-lang.org)
 [![WebSocket](https://img.shields.io/badge/realtime-WebSocket-lightblue?style=flat-square)](WASM_MODULES.md)
