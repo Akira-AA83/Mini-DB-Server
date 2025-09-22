@@ -1,10 +1,10 @@
 # 🎮 Mini-DB Module Configuration
 # ===============================
-# Configurazione per collegare tabelle a moduli WASM esterni
-# Non modificare il codice del server - tutto viene configurato qui!
+# Universal module configuration - works with any database
+# Configure your WASM modules and table monitoring here
 
 [modules.tictactoe]
-# Modulo WASM per la logica di TicTacToe
+# TicTacToe WASM module
 wasm_module = "tictactoe"
 enabled = true
 description = "TicTacToe game logic and validation"
@@ -38,7 +38,7 @@ get_game_state = "get_game_state"
 # ===============================
 
 [modules.chat]
-# Modulo WASM per il sistema di chat real-time
+# Chat system WASM module
 wasm_module = "chat"
 enabled = true
 description = "Real-time chat system with message validation and room management"
@@ -76,3 +76,37 @@ validate_message = "validate_message"
 validate_room_creation = "validate_room_creation"
 process_chat_action = "process_chat_action"
 get_room_stats = "get_room_stats"
+
+# ===============================
+# 📡 OTHER MODULES (Examples)
+# ===============================
+
+[modules.iot_sensors]
+# IoT sensor processing WASM module
+wasm_module = "iot_processor"
+enabled = false  # Enable when you have the WASM file
+description = "IoT sensor data processing and validation"
+
+# Sensor Data Table
+[[modules.iot_sensors.tables]]
+name = "sensor_readings"
+events = ["insert"]
+realtime_enabled = true
+wasm_validation = true
+channel_pattern = "sensors.{sensor_id}"
+fields = ["reading_id", "sensor_id", "sensor_type", "value", "timestamp", "location"]
+
+[modules.live_dashboard]
+# Live dashboard WASM module
+wasm_module = "dashboard_processor"
+enabled = false  # Enable when you have the WASM file
+description = "Live dashboard data processing"
+
+# Dashboard Events Table
+[[modules.live_dashboard.tables]]
+name = "dashboard_events"
+events = ["insert", "update"]
+realtime_enabled = true
+wasm_validation = false
+channel_pattern = "dashboard.{event_type}"
+fields = ["event_id", "event_type", "data", "timestamp", "user_id"]

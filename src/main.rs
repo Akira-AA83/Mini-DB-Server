@@ -36,6 +36,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut db_path = "mini_db.db".to_string();
     let mut ws_port = 8080u16;
     let mut demo_mode = false;
+    let mut config_path = "module_config.toml".to_string();
     
     let mut i = 1;
     while i < args.len() {
@@ -46,6 +47,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     i += 2;
                 } else {
                     eprintln!("Error: --db requires a database path");
+                    std::process::exit(1);
+                }
+            },
+            "--config" | "-c" => {
+                if i + 1 < args.len() {
+                    config_path = args[i + 1].clone();
+                    i += 2;
+                } else {
+                    eprintln!("Error: --config requires a config file path");
                     std::process::exit(1);
                 }
             }
@@ -79,6 +89,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     println!("🔧 Configuration:");
     println!("   Database: {}", db_path);
+    println!("   Config File: {}", config_path);
     println!("   WebSocket Port: {}", ws_port);
     println!("   Demo Mode: {}", demo_mode);
     println!();
@@ -91,12 +102,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     
     // Start the integrated server
-    start_server(&db_path, ws_port).await?;
+    start_server(&db_path, ws_port, &config_path).await?;
     
     Ok(())
 }
 
-async fn start_server(db_path: &str, ws_port: u16) -> Result<(), Box<dyn std::error::Error>> {
+async fn start_server(db_path: &str, ws_port: u16, config_path: &str) -> Result<(), Box<dyn std::error::Error>> {
     println!("🚀 Starting Mini-DB Server...");
     
     // Initialize WASM Engine for external modules
@@ -149,13 +160,13 @@ async fn start_server(db_path: &str, ws_port: u16) -> Result<(), Box<dyn std::er
     // Create the sync server with shared database connection
     let mut sync_server = SyncServer::with_shared_db(db, 1000, 3600);
     
-    // Auto-configure modules if module_config.toml exists
-    if std::path::Path::new("module_config.toml").exists() {
-        println!("📋 Found module_config.toml - configuring external modules...");
+    // Auto-configure modules using the specified config file
+    if std::path::Path::new(config_path).exists() {
+        println!("📋 Found {} - configuring database contexts and modules...", config_path);
         // Configuration will be loaded automatically by the query executor during database operations
         println!("   ✅ Module configuration file detected, will be applied during query processing");
     } else {
-        println!("   📁 No module_config.toml found - WASM modules will run without table bindings");
+        println!("   📁 No {} found - using default configuration", config_path);
     }
     
     // Bind to all interfaces for WSL2/Docker compatibility
