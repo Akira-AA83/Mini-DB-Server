@@ -44,8 +44,8 @@ Traditional Game Backend          Mini-DB Server
 - **Rust/AssemblyScript/C++ module support**
 
 ### 🎮 **Unity Ready**
-- **Complete C# client library** included
-- **Real-time multiplayer examples** (TicTacToe, Chat)
+- **[Unity Package Available](https://github.com/Akira-AA83/Mini-DB-Unity)** - Complete C# client
+- **Real-time multiplayer examples** (TicTacToe, Chat, Pong)
 - **WebSocket integration** built-in
 - **Production-tested** with thousands of players
 
@@ -94,6 +94,9 @@ ws.onmessage = (event) => {
 ```
 
 ### Unity Integration
+
+**📦 [Download Unity Package](https://github.com/Akira-AA83/Mini-DB-Unity)**
+
 ```csharp
 // Unity C# client
 public class GameManager : MonoBehaviour {
@@ -110,6 +113,8 @@ public class GameManager : MonoBehaviour {
     }
 }
 ```
+
+**Includes**: Complete multiplayer examples (TicTacToe, Chat System, Pong), cross-platform support, and real-time WebSocket client.
 
 ## Gaming Examples
 
@@ -197,7 +202,10 @@ cd Mini-DB-Server
 cargo test
 ```
 
-## License
+## Related Projects
 
+- **[Mini-DB Unity Package](https://github.com/Akira-AA83/Mini-DB-Unity)** - Unity client with multiplayer examples
+
+## License
 
 MIT License - see [LICENSE](LICENSE) file.
